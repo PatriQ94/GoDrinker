@@ -1,9 +1,12 @@
 package main
 
 import (
-	"fmt"
+	"github.com/gen2brain/beeep"
 )
 
 func main() {
-	fmt.Println("This is just a test")
+	err := beeep.Notify("Title", "Message body", "drinklogo.png")
+	if err != nil {
+		panic(err)
+	}
 }
