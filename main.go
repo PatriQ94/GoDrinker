@@ -29,11 +29,14 @@ func main() {
 		os.Exit(1)
 	}
 
+	hour, minute, second := time.Now().Clock()
+	fmt.Println("Application started at time:", hour, ":", minute, ":", second, ". Next notification at:", hour+Interval, ":", minute, ":", second)
+
 	for {
 		//Delay by the interval
 		time.Sleep(time.Hour * time.Duration(Interval))
 
-		hour, _, _ := time.Now().Clock()
+		hour, minute, second := time.Now().Clock()
 
 		//If current time is outside of active hours, then skip
 		if hour < ActiveFrom || ActiveTo < hour {
@@ -43,9 +46,9 @@ func main() {
 
 		//Fire up the notification
 		err := beeep.Notify("GoDrinker", "It's time to drink yo!", "drinklogo.png")
-		fmt.Println("New notification! Next notification at:")
 		if err != nil {
 			panic(err)
 		}
+		fmt.Println("New notification at:", hour, ":", minute, ":", second, "! Next notification at:", hour+Interval, ":", minute, ":", second)
 	}
 }
