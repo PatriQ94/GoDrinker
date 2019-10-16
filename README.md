@@ -5,6 +5,7 @@ The app is still work in progress.
 
 Flags:
 -ActiveFrom=7 (Int, "Hour from when notifications become active")
+
 -ActiveTo= 17 (Int, "Hour when notifications become inactive")
 
 TODO: 
