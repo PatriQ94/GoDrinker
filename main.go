@@ -15,7 +15,7 @@ var (
 	ActiveTo   int
 
 	//Default interval in hours
-	Interval = 2
+	Interval int
 )
 
 func main() {
@@ -23,6 +23,7 @@ func main() {
 	//Parse flags and set defaults in case there's no options provided when running the app
 	flag.IntVar(&ActiveFrom, "ActiveFrom", 7, "Hour from when notifications become active")
 	flag.IntVar(&ActiveTo, "ActiveTo", 17, "Hour when notifications become inactive")
+	flag.IntVar(&Interval, "Interval", 2, "Interval of reminders in hours")
 	flag.Parse()
 
 	if ActiveTo < ActiveFrom {
