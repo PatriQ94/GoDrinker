@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"time"
 
@@ -33,7 +34,10 @@ func main() {
 
 	//Get current time and print out as a logger
 	hour, minute, second := time.Now().Clock()
-	fmt.Println(fmt.Sprintf("Application started at time: %d:%d:%d. Next notification at: %d:%d:%d", hour, minute, second, hour+Interval, minute, second))
+	err := beeep.Notify("GoDrinker", fmt.Sprintf("Application started at time: %d:%d:%d. Next notification at: %d:%d:%d", hour, minute, second, hour+Interval, minute, second), "drinklogo.png")
+	if err != nil {
+		panic(err)
+	}
 
 	for {
 		//Delay by the interval
@@ -43,15 +47,15 @@ func main() {
 
 		//If current time is outside of active hours, then skip
 		if hour < ActiveFrom || ActiveTo < hour {
-			fmt.Println("Notifications are inactive...")
+			log.Println("Notifications are inactive...")
 			continue
 		}
 
 		//Fire up the notification
-		err := beeep.Notify("GoDrinker", "It's time to drink yo!", "drinklogo.png")
+		err := beeep.Notify("GoDrinker", fmt.Sprintf("It's time to drink yo!\nNext notification at: %d:%d:%d", hour+Interval, minute, second), "drinklogo.png")
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println(fmt.Sprintf("New notification at: %d:%d:%d ! Next notification at: %d:%d:%d", hour, minute, second, hour+Interval, minute, second))
+		log.Println(fmt.Sprintf("New notification at: %d:%d:%d! Next notification at: %d:%d:%d", hour, minute, second, hour+Interval, minute, second))
 	}
 }

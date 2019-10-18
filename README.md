@@ -9,7 +9,9 @@ Flags:
 
 -ActiveTo= 17 (Int, "Hour when notifications become inactive")
 
+-Interval= 2 (Int, "Interval of reminders in hours")
+
+
 TODO: 
 - Check registry if OS has notifications enabled
-- Dynamic intervals
 - Add the amount of drink
